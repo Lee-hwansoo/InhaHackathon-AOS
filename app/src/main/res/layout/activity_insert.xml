@@ -121,5 +121,4 @@
         android:text="영수증 스캔하기"
         android:textColor="@color/white"
         android:background="@drawable/button_normal"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private const val BASE_URL = ""
-    private var service: RetrofitService
+    var service: RetrofitService
 
     init {
         val interceptorClient = OkHttpClient().newBuilder()

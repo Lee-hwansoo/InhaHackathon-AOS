@@ -1,5 +1,6 @@
 package com.takeeat.android
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +13,18 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.takeeat.android.adapter.AdapterRefrigeratorExpire
+import com.takeeat.android.adapter.AdapterRefrigeratorNormal
+import com.takeeat.android.data.model.RefrigeratorIngredientData
 import com.takeeat.android.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
+    private lateinit var normalAdapter: AdapterRefrigeratorNormal
+    private lateinit var expireAdapter: AdapterRefrigeratorExpire
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        loadExpireData(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,5 +78,31 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun loadNormalData(context: Context){
+        CoroutineScope(Dispatchers.Main).launch {
+            val listData = Refrigerator.getNormalData(context)
+            setNormalAdapter(context, listData)
+        }
+    }
+
+    private fun setNormalAdapter(context: Context, dataList: ArrayList<RefrigeratorIngredientData>){
+        normalAdapter = AdapterRefrigeratorNormal(dataList)
+        Refrigerator.setNormalAdapter(normalAdapter)
+        viewBinding.rvRefrigeratorNormal.adapter = normalAdapter
+    }
+
+    private fun loadExpireData(context: Context){
+        CoroutineScope(Dispatchers.Main).launch {
+            val listData = Refrigerator.getNormalData(context)
+            setExpireAdapter(context, listData)
+        }
+    }
+
+    private fun setExpireAdapter(context: Context, dataList: ArrayList<RefrigeratorIngredientData>){
+        expireAdapter = AdapterRefrigeratorExpire(dataList)
+        Refrigerator.setExpireAdapter(expireAdapter)
+        viewBinding.rvRefrigeratorExpire.adapter = expireAdapter
     }
 }
