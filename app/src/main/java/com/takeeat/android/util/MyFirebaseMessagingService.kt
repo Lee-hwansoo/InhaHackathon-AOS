@@ -10,6 +10,7 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.google.firebase.FirebaseApp
 import com.takeeat.android.MainActivity
 import com.takeeat.android.R
 import com.google.firebase.messaging.FirebaseMessaging
@@ -24,7 +25,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
     private val CHANNELNAME = ""
 
     // 토큰 가져오기
-    fun getFirebaseToken() {
+    fun getFirebaseToken(context: Context) {
         FirebaseMessaging.getInstance().token.addOnSuccessListener {
             Log.d(TAG, "token=${it}")
             UserSharedPreferences.setFCMToken(it)

@@ -3,20 +3,18 @@ package com.takeeat.android
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import com.google.firebase.FirebaseApp
 import com.takeeat.android.adapter.AdapterRefrigeratorExpire
 import com.takeeat.android.adapter.AdapterRefrigeratorNormal
+import com.takeeat.android.data.api.RetrofitClient
 import com.takeeat.android.data.model.RefrigeratorIngredientData
 import com.takeeat.android.databinding.ActivityMainBinding
+import com.takeeat.android.util.AndroidKeyStoreUtil
+import com.takeeat.android.util.MyFirebaseMessagingService
+import com.takeeat.android.util.UserSharedPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,7 +42,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        loadExpireData(this)
+        AndroidKeyStoreUtil.init(this)
+        UserSharedPreferences.initialize(this)
+        RetrofitClient.initialize(this)
+
+        /** FCM설정, Token값 가져오기 */
+        MyFirebaseMessagingService().getFirebaseToken(this)
+
+
+        //loadExpireData(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -95,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadExpireData(context: Context){
         CoroutineScope(Dispatchers.Main).launch {
-            val listData = Refrigerator.getNormalData(context)
+            val listData = Refrigerator.getExpireData(context)
             setExpireAdapter(context, listData)
         }
     }

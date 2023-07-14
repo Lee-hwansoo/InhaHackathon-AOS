@@ -66,7 +66,7 @@ object Refrigerator {
 
         try {
             // Retrofit의 비동기 호출을 suspend 함수로 래핑하여 사용합니다.
-            val response = RetrofitClient.service.getNormalRefrigerator().execute()
+            val response = RetrofitClient.service.getExpireRefrigerator().execute()
 
             if (response.isSuccessful.not()) {
                 Log.d("Refrigerator: 불러오기 실패", response.toString())
