@@ -1,4 +1,4 @@
-package com.takeeat.android
+package com.takeeat.android.camera
 
 import android.Manifest
 import android.content.ContentResolver
@@ -9,7 +9,6 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.text.TextUtils
 import android.util.Log
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat

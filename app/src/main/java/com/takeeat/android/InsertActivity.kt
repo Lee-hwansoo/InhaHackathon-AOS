@@ -1,39 +1,17 @@
 package com.takeeat.android
 
-import android.Manifest
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.media.ImageReader
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.TextUtils
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.core.net.toUri
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.takeeat.android.camera.CameraManager
 import com.takeeat.android.data.model.ImageItem
 import com.takeeat.android.databinding.ActivityInsertBinding
-import com.takeeat.android.databinding.ActivityMainBinding
 import com.takeeat.android.databinding.PopupPhotoBinding
-import java.io.File
 import java.util.ArrayList
 
 class InsertActivity : AppCompatActivity() {
