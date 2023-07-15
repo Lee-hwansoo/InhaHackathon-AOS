@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private lateinit var normalAdapter: AdapterRefrigeratorNormal
     private lateinit var expireAdapter: AdapterRefrigeratorExpire
+    val demo: ArrayList<RefrigeratorIngredientData> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +51,27 @@ class MainActivity : AppCompatActivity() {
         MyFirebaseMessagingService().getFirebaseToken(this)
 
 
+        demo.add(RefrigeratorIngredientData(1,"사과"))
+        demo.add(RefrigeratorIngredientData(2,"배"))
+        demo.add(RefrigeratorIngredientData(3,"귤"))
+        demo.add(RefrigeratorIngredientData(4,"고기"))
+        demo.add(RefrigeratorIngredientData(5,"한우"))
+        demo.add(RefrigeratorIngredientData(6,"조개"))
+        demo.add(RefrigeratorIngredientData(7,"버섯"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+        demo.add(RefrigeratorIngredientData(8,"쌈"))
+
+
+
         //loadExpireData(this)
+        setExpireAdapter(this, demo)
+
+        viewBinding.btnReceipt.isSelected = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

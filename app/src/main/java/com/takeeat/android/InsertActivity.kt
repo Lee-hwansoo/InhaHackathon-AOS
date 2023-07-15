@@ -12,6 +12,13 @@ import com.takeeat.android.util.CameraManager
 import com.takeeat.android.data.model.ImageItem
 import com.takeeat.android.databinding.ActivityInsertBinding
 import com.takeeat.android.databinding.PopupPhotoBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import java.util.ArrayList
 
 class InsertActivity : AppCompatActivity() {
@@ -33,7 +40,7 @@ class InsertActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.left)
         }
 
-
+        viewBinding.btnInsert.isSelected = true
 
         viewBinding.btnSearch.setOnClickListener {
 
@@ -116,6 +123,16 @@ class InsertActivity : AppCompatActivity() {
         Log.d("test", "newPath: $copyImagePath")
         val nowImageItem = ImageItem(imageUri, copyImagePath)
         imageItemList.add(nowImageItem)
+
+        val fileImage = File(nowImageItem!!.imageCopyPath)
+        val fileBody = RequestBody.create(MediaType.parse("application/octet-stream"),fileImage)
+        val filePart = MultipartBody.Part.createFormData("file", fileImage.name.replace("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9.]".toRegex(), "_"), fileBody)
+
+
+        CoroutineScope(Dispatchers.Main).launch {
+            Refrigerator.registReciept(applicationContext, filePart)
+        }
+
     }
 
 

@@ -30,6 +30,8 @@ class ReceiptDetailActivity : AppCompatActivity() {
             getBottomMenu()
         }
 
+        viewBinding.btnDone.isSelected = true
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -46,6 +48,7 @@ class ReceiptDetailActivity : AppCompatActivity() {
         // BottomSheetDialog 객체 생성. param : Context
         val dialog = BottomSheetDialog(this)
         val dialogLayout = PopupDoneBinding.inflate(layoutInflater)
+        dialogLayout.btnDone.isSelected = true
         dialogLayout.btnDone.setOnClickListener {
             dialog.cancel()
         }

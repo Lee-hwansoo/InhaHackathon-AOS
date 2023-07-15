@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @SuppressLint("StaticFieldLeak")
 object RetrofitClient {
-    private const val BASE_URL = "http://ec2-43-200-131-2.ap-northeast-2.compute.amazonaws.com"
+    private const val BASE_URL = "http://ec2-43-200-131-2.ap-northeast-2.compute.amazonaws.com:8080"
     var service: RetrofitService
     private lateinit var context: Context
 
@@ -55,7 +55,7 @@ object RetrofitClient {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request = chain.request()
             val response = chain.proceed(request)
-
+            Log.d("인증", response.toString())
             when (response.code()) {
                 400 -> {
                     // todo Control Error
