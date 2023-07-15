@@ -53,14 +53,7 @@ class CameraManager {
         ) {
             temp += Manifest.permission.CAMERA + " "
         }
-//        //파일 쓰기 권한 확인
-//        if (ContextCompat.checkSelfPermission(
-//                context,
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " "
-//        }
+
         if (!TextUtils.isEmpty(temp)) {
             Log.d("permission", "checkSelfPermission: 권한을 요청합니다.")
             // 권한 요청

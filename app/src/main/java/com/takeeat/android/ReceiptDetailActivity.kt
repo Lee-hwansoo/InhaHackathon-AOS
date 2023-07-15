@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.takeeat.android.databinding.ActivityReceiptBinding
 import com.takeeat.android.databinding.ActivityReceiptDetailBinding
+import com.takeeat.android.databinding.PopupDoneBinding
+import com.takeeat.android.databinding.PopupPhotoBinding
 
 class ReceiptDetailActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityReceiptDetailBinding
@@ -24,7 +27,7 @@ class ReceiptDetailActivity : AppCompatActivity() {
         }
 
         viewBinding.btnDone.setOnClickListener {
-
+            getBottomMenu()
         }
 
     }
@@ -37,5 +40,18 @@ class ReceiptDetailActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getBottomMenu(){
+        // BottomSheetDialog 객체 생성. param : Context
+        val dialog = BottomSheetDialog(this)
+        val dialogLayout = PopupDoneBinding.inflate(layoutInflater)
+        dialogLayout.btnDone.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.setContentView(dialogLayout.root)
+        dialog.setCanceledOnTouchOutside(true)  // BottomSheetdialog 외부 화면(회색) 터치 시 종료 여부 boolean(false : ㄴㄴ, true : 종료하자!)
+        dialog.create() // create()와 show()를 통해 출력!
+        dialog.show()
     }
 }
