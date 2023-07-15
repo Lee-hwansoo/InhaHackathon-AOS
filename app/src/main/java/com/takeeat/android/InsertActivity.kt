@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.takeeat.android.camera.CameraManager
+import com.takeeat.android.util.CameraManager
 import com.takeeat.android.data.model.ImageItem
 import com.takeeat.android.databinding.ActivityInsertBinding
 import com.takeeat.android.databinding.PopupPhotoBinding

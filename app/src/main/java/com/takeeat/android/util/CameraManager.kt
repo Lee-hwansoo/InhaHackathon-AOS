@@ -1,4 +1,4 @@
-package com.takeeat.android.camera
+package com.takeeat.android.util
 
 import android.Manifest
 import android.content.ContentResolver
